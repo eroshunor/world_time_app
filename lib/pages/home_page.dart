@@ -14,12 +14,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
 
-    //data sent from loading with pushReplacementNamed method
-    data = ModalRoute.of(context)?.settings.arguments as Map;
+    //default data sent from loading with pushReplacementNamed method
+    data = data.isNotEmpty ? data : ModalRoute.of(context)?.settings.arguments as Map;
 
     //set background
     String backgroundImage = data['isDayTime'] ? 'day.png' : 'night.png';
-    Color? backgroundColor = data['isDayTime'] ? Colors.teal : Colors.blueGrey;
+    Color backgroundColor = data['isDayTime'] ? Colors.teal : Colors.blueGrey;
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -32,11 +32,21 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.only(top: 120),
+            padding: const EdgeInsets.only(top: 130),
             child: Column(
               children: [
                 TextButton.icon(
-                  onPressed: () => Navigator.pushNamed(context, '/chooseLocationPage'),
+                  onPressed: () async {
+                    dynamic result = await Navigator.pushNamed(context, '/chooseLocationPage');
+                    setState(() {
+                      data = {
+                        'time': result['time'],
+                        'location': result['location'],
+                        'isDayTime': result['isDayTime'],
+                        'flag': result['flag'],
+                      };
+                    });
+                  },
                   icon: Icon(Icons.edit_location_rounded, color: Colors.grey[300]),
                   label: Text('Edit location', style: TextStyle(color: Colors.grey[300])),
                 ),

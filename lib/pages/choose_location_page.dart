@@ -21,12 +21,26 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
     WorldTime(url: 'Asia/Jakarta', location: 'Jakarta', flag: 'indonesia.png'),
   ];
 
+  void updateTime(index) async {
+    WorldTime instance = locations[index];
+    await instance.getTime();
+
+    //navigate back to home screen and show selected location data
+    Navigator.pop(context, {
+      'location': instance.location,
+      'flag': instance.flag,
+      'time': instance.time,
+      'isDayTime': instance.isDayTime,
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Choose a location'),
         centerTitle: true,
+        backgroundColor: Colors.blue[800],
       ),
       body: ListView.builder(
         itemCount: locations.length,
@@ -36,7 +50,7 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
             child: Card(
               child: ListTile(
                 onTap: () {
-                  print(locations[index].location);
+                  updateTime(index);
                 },
                 title: Text(locations[index].location),
                 leading: CircleAvatar(

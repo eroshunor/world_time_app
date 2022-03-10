@@ -12,8 +12,9 @@ class LoadingPage extends StatefulWidget {
 class _LoadingPageState extends State<LoadingPage> {
 
   void setupWorldTime() async {
-    WorldTime instance = WorldTime(location: 'Berlin', flag: 'germany.png', url: 'europe/Berlin');
+    WorldTime instance = WorldTime(location: 'Berlin', flag: 'germany.png', url: 'Europe/Berlin');
     await instance.getTime();
+
     Navigator.pushReplacementNamed(context, '/homePage', arguments: {
       'location': instance.location,
       'flag': instance.flag,
@@ -31,10 +32,9 @@ class _LoadingPageState extends State<LoadingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
       body: Center(
         child: SpinKitChasingDots(
-          color: Colors.white,
+          color: Colors.blue[800],
           size: 80.0,
         ),
       )
