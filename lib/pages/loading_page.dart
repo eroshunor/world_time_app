@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:world_time_app/services/world_time.dart';
 
 class LoadingPage extends StatefulWidget {
@@ -17,6 +18,7 @@ class _LoadingPageState extends State<LoadingPage> {
       'location': instance.location,
       'flag': instance.flag,
       'time': instance.time,
+      'isDayTime': instance.isDayTime,
     });
   }
 
@@ -29,7 +31,13 @@ class _LoadingPageState extends State<LoadingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text('Loading'),
+      backgroundColor: Colors.blue,
+      body: Center(
+        child: SpinKitChasingDots(
+          color: Colors.white,
+          size: 80.0,
+        ),
+      )
     );
   }
 }

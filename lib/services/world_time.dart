@@ -1,6 +1,8 @@
 import 'package:http/http.dart';
 import 'dart:convert';
 
+import 'package:intl/intl.dart';
+
 class WorldTime{
 
   //location name for UI
@@ -14,6 +16,9 @@ class WorldTime{
 
   //location url for api endpoint
   late String url;
+
+  //is daytime or not
+  late bool isDayTime;
 
   WorldTime({required this.location, required this.flag, required this.url});
 
@@ -33,7 +38,10 @@ class WorldTime{
       now = now.add(Duration(hours: int.parse(utcOffset)));
 
       //set the time property
-      time = now.toString();
+      time = DateFormat.jm().format(now);
+
+      //check if is daytime or not
+      isDayTime = now.hour > 7 && now.hour < 19 ? true : false;
     }  catch (e) {
       time = 'Could not load time data';
     }
