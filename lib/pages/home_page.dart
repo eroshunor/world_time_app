@@ -19,8 +19,10 @@ class _HomePageState extends State<HomePage> {
 
     //set background
     String backgroundImage = data['isDayTime'] ? 'day.png' : 'night.png';
+    Color? backgroundColor = data['isDayTime'] ? Colors.teal : Colors.blueGrey;
 
     return Scaffold(
+      backgroundColor: backgroundColor,
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
@@ -35,8 +37,8 @@ class _HomePageState extends State<HomePage> {
               children: [
                 TextButton.icon(
                   onPressed: () => Navigator.pushNamed(context, '/chooseLocationPage'),
-                  icon: const Icon(Icons.edit_location_rounded),
-                  label: const Text('Edit location'),
+                  icon: Icon(Icons.edit_location_rounded, color: Colors.grey[300]),
+                  label: Text('Edit location', style: TextStyle(color: Colors.grey[300])),
                 ),
                 const SizedBox(height: 20),
                 Row(
@@ -44,9 +46,10 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Text(
                       data['location'],
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 28,
                         letterSpacing: 2,
+                        color: Colors.grey[300],
                       ),
                     ),
                   ],
@@ -54,9 +57,10 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 20),
                 Text(
                   data['time'],
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 65,
                     letterSpacing: 2,
+                    color: Colors.grey[300],
                   ),
                 ),
               ],
