@@ -11,7 +11,17 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: Text('HomePage')),
+      body: SafeArea(
+        child: Column(
+          children: [
+            TextButton.icon(
+              onPressed: () => Navigator.pushNamed(context, '/chooseLocationPage'),
+              icon: const Icon(Icons.edit),
+              label: const Text('Edit location'),
+            ),
+          ],
+        ),
+      )
     );
   }
 }

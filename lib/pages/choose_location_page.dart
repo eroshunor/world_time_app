@@ -11,6 +11,10 @@ class _ChooseLocationPageState extends State<ChooseLocationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Choose a location'),
+        centerTitle: true,
+      ),
       body: Text('ChooseLocationPage'),
     );
   }
